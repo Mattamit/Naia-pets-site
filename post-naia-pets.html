@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post Naia Pets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Kalam:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root { --cream:#f6e3c3; --ink:#2b1a10; --blue:#cfe6f7; --white:#fff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#1d1d1f; font-family: system-ui, sans-serif; color:#eee;
+         display:flex; flex-direction:column; align-items:center; gap:16px; padding:16px; }
+  .tools { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .tools label, .tools button { background:#f6e3c3; color:#2b1a10; border:0; border-radius:8px;
+         padding:10px 16px; font-weight:700; cursor:pointer; font-size:15px; }
+  .tools input { display:none; }
+  .hint { font-size:13px; opacity:.7; text-align:center; max-width:540px; }
+  .wrap { width:min(540px, 100%); aspect-ratio:4/5; position:relative; }
+  /* Le post est conçu en 1080x1350 puis réduit à l'écran */
+  #post { width:1080px; height:1350px; position:absolute; top:0; left:0; transform-origin:top left;
+          overflow:hidden; font-family:'Kalam', cursive; color:var(--ink);
+          background: linear-gradient(180deg,#3d8fd6 0%,#7cc0ee 38%,#6fb3d9 52%,#e7cf9f 62%,#d8b67c 100%); }
+  #photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,40,90,.45) 0%,rgba(0,0,0,0) 30%); }
+  .placeholder { position:absolute; left:40px; top:700px; width:400px; text-align:center;
+          font:700 34px system-ui; color:rgba(255,255,255,.85); }
+  .title { position:absolute; top:60px; left:0; right:0; text-align:center; line-height:.95;
+           font-family:'Caveat Brush', cursive; transform:rotate(-4deg); }
+  .title .l1 { font-size:118px; color:var(--white); text-shadow:0 4px 0 rgba(0,0,0,.25); }
+  .title .l2 { font-size:118px; color:var(--cream); text-shadow:0 4px 0 rgba(0,0,0,.25); }
+  .underline { position:absolute; top:330px; left:260px; width:620px; }
+  .tag { position:absolute; right:40px; padding:10px 30px; transform:rotate(-5deg);
+         font-family:'Caveat Brush', cursive; line-height:1; text-align:center; }
+  .tag.cream { background:var(--cream); }
+  .tag.blue { background:var(--blue); }
+  .t1 { top:470px; font-size:82px; right:50px; }
+  .t2 { top:690px; font-size:66px; }
+  .t3 { top:800px; font-size:66px; }
+  .t4 { top:910px; font-size:84px; right:30px; }
+  .t5 { top:1035px; font-size:58px; right:60px; }
+  .sig { position:absolute; right:50px; bottom:15px; text-align:center; transform:rotate(-8deg); }
+  .sig .name { font-family:'Caveat Brush', cursive; font-size:84px; color:var(--ink);
+               text-shadow:0 0 18px rgba(246,227,195,.9); }
+  svg.deco { position:absolute; }
+</style>
+</head>
+<body>
+  <div class="tools">
+    <label>📷 Choisir la photo du chien<input type="file" id="file" accept="image/*"></label>
+    <button id="dl">⬇️ Télécharger en PNG</button>
+  </div>
+  <p class="hint">Format 1080×1350 (Instagram / Facebook). Cliquez sur un texte pour le modifier directement.</p>
+
+  <div class="wrap" id="wrap">
+    <div id="post">
+      <img id="photo" alt="" style="display:none">
+      <div class="placeholder" id="ph">Votre photo de chien<br>avec sa gamelle ici</div>
+      <div class="shade"></div>
+
+      <div class="title" contenteditable>
+        <div class="l1">Alors, dites-moi…</div>
+        <div class="l2">on en parle ?</div>
+      </div>
+      <svg class="underline" viewBox="0 0 620 40"><path d="M10 28 C180 8 420 6 610 18" stroke="#f6e3c3" stroke-width="10" fill="none" stroke-linecap="round"/></svg>
+
+      <div class="tag cream t1" contenteditable>Votre chien<br>se sent mieux ?</div>
+      <div class="tag blue t2" contenteditable>Depuis qu'il a</div>
+      <div class="tag blue t3" contenteditable>sa nouvelle</div>
+      <div class="tag cream t4" contenteditable>gamelle Naia ?</div>
+      <div class="tag blue t5" contenteditable>Racontez-nous 👇</div>
+
+      <div class="sig">
+        <svg width="100" height="95" viewBox="0 0 100 95"><g fill="#2b1a10">
+          <ellipse cx="50" cy="65" rx="26" ry="22"/><ellipse cx="18" cy="38" rx="10" ry="13"/>
+          <ellipse cx="38" cy="18" rx="10" ry="14"/><ellipse cx="62" cy="18" rx="10" ry="14"/>
+          <ellipse cx="82" cy="38" rx="10" ry="13"/></g>
+          <path d="M50 76 l-10-10 a6 6 0 0 1 10-7 a6 6 0 0 1 10 7z" fill="#f6e3c3"/></svg>
+        <div class="name" contenteditable>Naia Pets ♥</div>
+      </div>
+
+      <!-- décorations : cœurs, pattes, traits -->
+      <svg class="deco" style="left:40px;top:260px" width="120" height="110" viewBox="0 0 60 55"><path d="M30 50 C5 32 2 18 10 10 C18 2 28 8 30 16 C32 8 42 2 50 10 C58 18 55 32 30 50Z" fill="none" stroke="#f6e3c3" stroke-width="4"/></svg>
+      <svg class="deco" style="right:60px;top:300px" width="110" height="100" viewBox="0 0 60 55"><path d="M30 50 C5 32 2 18 10 10 C18 2 28 8 30 16 C32 8 42 2 50 10 C58 18 55 32 30 50Z" fill="none" stroke="#f6e3c3" stroke-width="4"/></svg>
+      <svg class="deco" style="left:470px;top:380px" width="80" height="75" viewBox="0 0 60 55"><path d="M30 50 C5 32 2 18 10 10 C18 2 28 8 30 16 C32 8 42 2 50 10 C58 18 55 32 30 50Z" fill="none" stroke="#fff" stroke-width="4"/></svg>
+      <svg class="deco" style="left:120px;top:1000px" width="110" height="100" viewBox="0 0 60 55"><path d="M30 50 C5 32 2 18 10 10 C18 2 28 8 30 16 C32 8 42 2 50 10 C58 18 55 32 30 50Z" fill="none" stroke="#f6e3c3" stroke-width="4"/></svg>
+      <svg class="deco" style="left:330px;top:1180px" width="100" height="95" viewBox="0 0 60 55"><path d="M30 50 C5 32 2 18 10 10 C18 2 28 8 30 16 C32 8 42 2 50 10 C58 18 55 32 30 50Z" fill="none" stroke="#fff" stroke-width="4"/></svg>
+      <svg class="deco" style="right:50px;top:150px" width="110" height="105" viewBox="0 0 100 95"><g fill="#f6e3c3">
+        <ellipse cx="50" cy="65" rx="26" ry="22"/><ellipse cx="18" cy="38" rx="10" ry="13"/>
+        <ellipse cx="38" cy="18" rx="10" ry="14"/><ellipse cx="62" cy="18" rx="10" ry="14"/>
+        <ellipse cx="82" cy="38" rx="10" ry="13"/></g></svg>
+      <svg class="deco" style="left:150px;top:30px" width="120" height="90" viewBox="0 0 120 90" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M20 60 L50 75"/><path d="M40 20 L60 50"/><path d="M80 5 L85 40"/></svg>
+      <svg class="deco" style="right:120px;top:40px" width="120" height="90" viewBox="0 0 120 90" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M100 60 L70 75"/><path d="M80 20 L60 50"/><path d="M40 5 L35 40"/></svg>
+    </div>
+  </div>
+
+<script>
+  const post = document.getElementById('post'), wrap = document.getElementById('wrap');
+  function fit() { post.style.transform = 'scale(' + (wrap.clientWidth / 1080) + ')'; }
+  window.addEventListener('resize', fit); fit();
+
+  document.getElementById('file').addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    const img = document.getElementById('photo');
+    img.src = URL.createObjectURL(f); img.style.display = 'block';
+    document.getElementById('ph').style.display = 'none';
+  });
+
+  document.getElementById('dl').addEventListener('click', async () => {
+    const prev = post.style.transform; post.style.transform = 'none';
+    const canvas = await html2canvas(post, { width:1080, height:1350, scale:1, useCORS:true });
+    post.style.transform = prev;
+    const a = document.createElement('a');
+    a.download = 'naia-pets-post.png'; a.href = canvas.toDataURL('image/png'); a.click();
+  });
+</script>
+</body>
+</html>
