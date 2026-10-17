@@ -1,0 +1,993 @@
+<title>Plan Reels Naïa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* Mise en page : dossier de production sur une colonne de 900px ; calendrier en tableau ; scripts en fiches à deux clips côte à côte. */
+:root{
+  --creme:#FBF7F0; --carte:#FFFFFF; --encre:#2E4756; --texte:#26333B; --doux:#5D6B73; --ligne:#E6DDD0;
+  --teal:#0E9C93; --teal-fonce:#0B6F69; --teal-pale:#DDF1EF; --sable:#E8A87C; --sable-pale:#F7E6D8; --brique:#8A3A1C; --brique-pale:#F6DCD1;
+  --bloc:#F3ECE1; --pre:#F6F1E8;
+  --f-titre:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-texte:"DM Sans", "Segoe UI", system-ui, sans-serif;
+  --f-code:"DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --creme:#131D22; --carte:#1B272E; --encre:#E7EDEF; --texte:#D6DDE0; --doux:#9AA8AF; --ligne:#2C3B43;
+  --teal:#3CC4BA; --teal-fonce:#7FDDD5; --teal-pale:#163A3A; --sable:#F0B48E; --sable-pale:#3A2B22; --brique:#F2B49C; --brique-pale:#3B231A;
+  --bloc:#22313A; --pre:#18232A; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --creme:#131D22; --carte:#1B272E; --encre:#E7EDEF; --texte:#D6DDE0; --doux:#9AA8AF; --ligne:#2C3B43;
+  --teal:#3CC4BA; --teal-fonce:#7FDDD5; --teal-pale:#163A3A; --sable:#F0B48E; --sable-pale:#3A2B22; --brique:#F2B49C; --brique-pale:#3B231A;
+  --bloc:#22313A; --pre:#18232A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--creme);color:var(--texte);font:16px/1.6 var(--f-texte);}
+.wrap{max-width:900px;margin:0 auto;padding-block:28px 72px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+h1,h2,h3,h4{font-family:var(--f-titre);color:var(--encre);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,6.4vw,48px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(23px,4.4vw,31px);font-weight:800;margin-top:56px;padding-top:16px;border-top:2px solid var(--ligne)}
+h3{font-size:20px;font-weight:700}
+h4{font-size:16px;font-weight:700}
+p{margin:0}
+a{color:var(--teal-fonce)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.kicker{display:inline-block;align-self:flex-start;background:var(--encre);color:var(--creme);border-radius:99px;padding:4px 12px;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.lead{font-size:18px;color:var(--doux);max-width:62ch}
+.small{font-size:13.5px;color:var(--doux)}
+.card{background:var(--carte);border:1px solid var(--ligne);border-radius:16px;padding:18px 20px}
+.verdict{background:var(--encre);border:0;color:var(--creme)}
+.verdict h3,.verdict strong{color:var(--creme)}
+.verdict ul{margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.alert{border-left:6px solid var(--sable)}
+.ok{border-left:6px solid var(--teal)}
+ul.clean,ol.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.toc{columns:2;column-gap:28px;margin:0;padding-left:20px}
+.toc li{break-inside:avoid;margin:3px 0}
+@media(max-width:560px){.toc{columns:1}}
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.grid2>*{min-width:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--ligne);border-radius:14px;background:var(--carte)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+.tw table{min-width:640px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--ligne);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-titre);font-weight:700;color:var(--encre);background:var(--bloc);font-size:14px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:10px;border-radius:5px;background:var(--bloc);min-width:120px;position:relative}
+.bar span{position:absolute;inset:0 auto 0 0;border-radius:5px;background:var(--teal)}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap;line-height:1.6}
+.s-mechants{background:var(--brique-pale);color:var(--brique)}
+.s-frigo{background:var(--teal-pale);color:var(--teal-fonce)}
+.s-face{background:var(--encre);color:var(--creme)}
+.s-avis{background:var(--sable-pale);color:var(--brique)}
+.s-quiz{background:var(--bloc);color:var(--encre)}
+.serie{display:flex;flex-direction:column;gap:6px}
+.persona{display:flex;flex-direction:column;gap:8px}
+.persona .role{color:var(--teal-fonce);font-weight:700;font-size:14px}
+.script{background:var(--carte);border:1px solid var(--ligne);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
+.s-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px}
+.s-num{font-family:var(--f-titre);font-weight:800;font-size:30px;color:var(--teal);line-height:1}
+.s-date{font-size:13.5px;color:var(--doux);font-weight:700}
+.s-head h3{flex-basis:100%;font-size:23px}
+.meta{font-size:14px;color:var(--doux)}
+.hook{background:var(--sable-pale);border-radius:12px;padding:10px 14px;font-weight:700;color:var(--encre)}
+.hook small{display:block;font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--brique)}
+.clip{border:1px solid var(--ligne);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.clip h4 small{font-family:var(--f-texte);font-weight:500;color:var(--doux);font-size:13px}
+.beats{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+.beats b{display:inline-block;min-width:56px;color:var(--teal-fonce);font-variant-numeric:tabular-nums}
+.line{margin:0;padding:10px 12px;border-left:3px solid var(--teal);background:var(--bloc);border-radius:0 10px 10px 0;font-style:italic;color:var(--encre)}
+.line small{display:block;font-style:normal;font-size:12px;color:var(--doux);margin-top:4px}
+details{border-radius:10px}
+summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--teal-fonce)}
+pre{font-family:var(--f-code);font-size:12.5px;line-height:1.55;background:var(--pre);border:1px solid var(--ligne);border-radius:10px;padding:12px;margin:8px 0 0;white-space:pre-wrap;word-break:break-word;color:var(--texte)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+button.copy{font:700 13.5px var(--f-texte);color:var(--teal-fonce);background:transparent;border:1.5px solid var(--teal);border-radius:99px;padding:6px 14px;cursor:pointer}
+button.copy:hover{background:var(--teal-pale)}
+button.copy.done{background:var(--teal);color:var(--carte);border-color:var(--teal)}
+.post{display:flex;flex-direction:column;gap:10px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:14.5px}
+.kv dt{font-weight:700;color:var(--encre)}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media(max-width:560px){.kv{grid-template-columns:1fr}.kv dd{margin-bottom:6px}}
+.safety{font-size:13.5px;color:var(--doux);border-top:1px dashed var(--ligne);padding-top:10px}
+.funnel{counter-reset:f;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.funnel li{counter-increment:f;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.funnel li::before{content:counter(f);font-family:var(--f-titre);font-weight:800;color:var(--creme);background:var(--teal);border-radius:50%;width:30px;height:30px;display:grid;place-items:center;font-size:15px}
+.foot{margin-top:56px;font-size:13px;color:var(--doux)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<div class="wrap stack">
+<span class="kicker">Naïa Pets · Plan Reels · 17/10/2026</span>
+<h1>Le format qui cartonne, version Naïa</h1>
+<p class="lead">Ce que fait le compte que tu m'as montré, pourquoi ça marche, et 10 vidéos prêtes à tirer dans Gemini Omni d'ici fin novembre. Chacune donne un vrai conseil et mène vers une fiche de naiapets.fr.</p>
+<div class="card verdict"><h3>En bref</h3><ul>
+<li><strong>Une recette, pas un coup de chance.</strong> Sur les 8 Reels dont on voit les vues, le compte totalise environ 412 000 vues, 51 000 en moyenne, et aucun ne descend sous 20 000. Même chien, même maîtresse, même cuisine, des aliments et des plantes qui parlent.</li>
+<li><strong>Ce qui marche le mieux chez eux : l'astuce du quotidien</strong> (le comprimé dans le fromage, 78 300 vues) et la question qui intrigue (« Quel âge avait… », 70 100). Le moins bon : le maquereau (20 300), un conseil qu'on applique rarement.</li>
+<li><strong>Notre version : le conseil EST la démonstration produit.</strong> La courge se sert dans Orbe, les griffes se coupent avec Sérénité au mur, la pluie se gère avec Explore. 9 vidéos sur 10 mènent à une fiche produit, 1 sur 10 sert seulement à faire connaître le compte.</li>
+<li><strong>5 séries en rotation au lieu de la chanson seule</strong> : Les Méchants, Le Frigo de Léa, Avant / Avec Naïa, Noisette (ou Pacha) a un avis, Le Quiz. La chanson reste possible, une vidéo sur six.</li>
+<li><strong>Le calendrier suit la saison</strong> : marrons, Halloween, Toussaint, pluie de novembre, puis Noël et le Black Friday du 27 novembre.</li>
+<li><strong>Chaque vidéo vend de trois façons</strong> : la carte de fin, le lien suivi dans le commentaire épinglé, et un message privé automatique quand quelqu'un commente le mot-clé.</li>
+</ul></div>
+<div class="card alert stack"><strong>Ce que je n'ai pas pu voir</strong><p>Mon environnement n'a pas accès à Facebook : les deux liens de Reels ne s'ouvrent pas chez moi. Toute l'analyse ci-dessous vient de ta capture de la grille Reels (miniatures, textes visibles, nombre de vues). Envoie-moi un enregistrement d'écran des deux vidéos, comme pour le Reel du sweat, et j'affinerai : durée exacte, rythme des plans, voix, musique, texte de fin.</p></div>
+<div class="card"><strong>Sommaire</strong><ol class="toc">
+<li><a href="#ref">Le compte de référence</a></li>
+<li><a href="#pourquoi">Pourquoi ça marche</a></li>
+<li><a href="#recette">La recette Naïa</a></li>
+<li><a href="#casting">Le casting</a></li>
+<li><a href="#series">Les 5 séries</a></li>
+<li><a href="#calendrier">Calendrier</a></li>
+<li><a href="#scripts">Les 10 scripts</a></li>
+<li><a href="#vente">Du Reel à la vente</a></li>
+<li><a href="#tournage">Règles de tournage et de montage</a></li>
+<li><a href="#conformite">Conformité</a></li>
+<li><a href="#budget">Budget et indicateurs</a></li>
+<li><a href="#decembre">Idées pour décembre</a></li>
+<li><a href="#decisions">Décisions à prendre</a></li>
+</ol></div>
+<h2 id="ref">1. Le compte de référence</h2>
+<p>Les miniatures de la grille Reels, classées par vues. Toutes les vidéos utilisent le même golden retriever, la même maîtresse brune en pull rouge et la même cuisine. Le dernier Reel (kéfir) venait d'être publié au moment de la capture.</p>
+<div class="tw"><table><thead><tr><th>Sujet (d'après la miniature)</th><th>Type</th><th class="num">Vues</th><th>Échelle 0 à 80 000</th></tr></thead><tbody>
+<tr><td>Comprimé caché dans un morceau de fromage, chien méfiant</td><td>Astuce du quotidien</td><td class="num">78 300</td><td><div class="bar" role="img" aria-label="78 300 vues"><span style="width:97.9%"></span></div></td></tr>
+<tr><td>« Quel âge avait… » : maîtresse qui râpe des carottes</td><td>Question / curiosité</td><td class="num">70 100</td><td><div class="bar" role="img" aria-label="70 100 vues"><span style="width:87.6%"></span></div></td></tr>
+<tr><td>Carotte : « presque ZÉRO calorie »</td><td>Aliment ami</td><td class="num">56 500</td><td><div class="bar" role="img" aria-label="56 500 vues"><span style="width:70.6%"></span></div></td></tr>
+<tr><td>Cycas (palmier) : « UNE SEULE DE [ses graines] »</td><td>Danger</td><td class="num">54 800</td><td><div class="bar" role="img" aria-label="54 800 vues"><span style="width:68.5%"></span></div></td></tr>
+<tr><td>« … a mauvaise haleine »</td><td>Problème</td><td class="num">50 300</td><td><div class="bar" role="img" aria-label="50 300 vues"><span style="width:62.9%"></span></div></td></tr>
+<tr><td>Gamelle de croquettes qui boude, bras croisés</td><td>Objet qui parle</td><td class="num">49 800</td><td><div class="bar" role="img" aria-label="49 800 vues"><span style="width:62.3%"></span></div></td></tr>
+<tr><td>Monstre poilu (sujet illisible sur la miniature)</td><td>Problème</td><td class="num">31 700</td><td><div class="bar" role="img" aria-label="31 700 vues"><span style="width:39.6%"></span></div></td></tr>
+<tr><td>Maquereau à bonnet, petits monstres rouges sur le chien</td><td>Aliment ami</td><td class="num">20 300</td><td><div class="bar" role="img" aria-label="20 300 vues"><span style="width:25.4%"></span></div></td></tr>
+<tr><td>Kéfir : écran d'étude scientifique (publié à l'instant)</td><td>Aliment ami + preuve</td><td class="num">594</td><td><div class="bar" role="img" aria-label="594 vues"><span style="width:0.7%"></span></div></td></tr>
+</tbody></table></div>
+<p class="small">Deux autres Reels sont visibles sans leurs vues : un monstre de feuilles d'automne coiffé d'un gland (sujet de saison) et une entrée de maison vide avec le chien (probablement la solitude quand on part). Sur l'écran d'étude du kéfir, on lit la source : Italian Journal of Animal Science, 2024, et la mention « Ne remplace pas un avis vétérinaire ».</p>
+<h2 id="pourquoi">2. Pourquoi ça marche</h2>
+<div class="grid2">
+<div class="card ok"><h4>Un objet qui parle dès la 1re seconde</h4><p class="small" style="margin-top:6px">Une gamelle qui boude, un palmier qui menace : l'image est absurde, le pouce s'arrête de défiler.</p></div>
+<div class="card ok"><h4>Un casting fixe</h4><p class="small" style="margin-top:6px">Même chien, même maîtresse, même cuisine. Au 3e Reel, on reconnaît la série et on la regarde jusqu'au bout.</p></div>
+<div class="card ok"><h4>La question que tout maître se pose</h4><p class="small" style="margin-top:6px">« Il peut manger ça ? », « Comment lui donner son médicament ? » : des questions qu'on tape aussi sur Google.</p></div>
+<div class="card ok"><h4>Peur et bienfait en alternance</h4><p class="small" style="margin-top:6px">Un danger (cycas, gland), puis un aliment ami (carotte, kéfir). Le fil ne lasse pas.</p></div>
+<div class="card ok"><h4>Sous-titres mot à mot, un mot surligné</h4><p class="small" style="margin-top:6px">« presque ZÉRO calorie », « mauvaise haleine », « UNE SEULE » : on lit même sans le son.</p></div>
+<div class="card ok"><h4>Une preuve à l'écran</h4><p class="small" style="margin-top:6px">Le nom de l'étude, puis « Ne remplace pas un avis vétérinaire ». On partage plus facilement ce qui a l'air sérieux.</p></div>
+<div class="card ok"><h4>La saison</h4><p class="small" style="margin-top:6px">Feuilles d'automne et gland publiés en octobre : le sujet colle à ce que le maître vit cette semaine.</p></div>
+<div class="card ok"><h4>Peu de vidéos, mais soignées</h4><p class="small" style="margin-top:6px">Chaque Reel est un petit film. Mieux vaut 2 vidéos fortes par semaine que 7 moyennes.</p></div>
+</div>
+<h2 id="recette">3. La recette Naïa</h2>
+<p>On reprend la mécanique, pas les vidéos : notre chien, notre chat, notre maîtresse, nos produits, et des sujets que l'autre compte n'a pas traités.</p>
+<div class="card stack"><ul class="clean">
+<li><strong>Le conseil doit rester vrai même sans acheter.</strong> Le produit Naïa est simplement la façon la plus simple de l'appliquer.</li>
+<li><strong>Les produits Naïa ne parlent jamais et n'ont jamais de visage.</strong> Ils apparaissent tels qu'ils sont, d'après la photo de la fiche, pour qu'on les reconnaisse sur le site. Les méchants, les aliments et les objets du quotidien, eux, parlent.</li>
+<li><strong>Léa est un personnage, jamais une cliente.</strong> Elle ne dit pas « j'ai acheté ». Les avis restent ceux des fiches, présentés comme sur le site (avis d'acheteurs du modèle, annonces fournisseur).</li>
+<li><strong>Chien et chat.</strong> Le compte de référence ne parle qu'aux maîtres de chiens ; Naïa vend aussi aux maîtres de chats. Pacha nous ouvre ce public.</li>
+<li><strong>Deux clips de 10 s + une carte de fin de 2 s</strong> : environ 22 secondes par vidéo. Clip A = le problème ou le méchant, clip B = la solution.</li>
+<li><strong>Rythme : 2 vidéos par semaine</strong>, publiées en même temps sur Facebook, Instagram et TikTok.</li>
+</ul></div>
+<h2 id="casting">4. Le casting</h2>
+<p>Les blocs anglais sont déjà recopiés mot pour mot dans chaque prompt plus bas. Pour que les personnages restent identiques d'une vidéo à l'autre, commence par générer une fiche personnage (image) de chacun, puis joins-la en image de référence à chaque tir.</p>
+<div class="grid2">
+<div class="card persona"><h3>Noisette</h3><span class="role">Le chien · beagle tricolore</span><p class="small">Pourquoi un beagle et pas un golden : on se distingue du compte de référence, et le beagle est le glouton au flair légendaire. Parfait pour Tempo, Explore et Malin. C'est aussi un chien de taille moyenne, compatible avec Orbe.</p>
+<pre id="cast-NOISETTE">Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.</pre>
+<details><summary>Prompt de la fiche personnage (image)</summary><pre id="sheet-NOISETTE">Character turnaround sheet, 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand. Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag. Front, three-quarter, side and back views, plus three expressions: happy, suspicious, guilty. Plain cream studio background, soft even light, clean image.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="cast-NOISETTE">Copier le bloc</button><button class="copy" type="button" data-copy="sheet-NOISETTE">Copier la fiche</button></div></div>
+<div class="card persona"><h3>Pacha</h3><span class="role">Le chat · tigré roux, diva</span><p class="small">Il ouvre la série aux maîtres de chats : fontaines, plantes toxiques, Orbe. Même couleur de chat que celle prévue dans le casting de la ferme vidéo.</p>
+<pre id="cast-PACHA">Pacha, a chubby orange tabby cat with bright green eyes, white chest and white front paws, half-closed eyelids and the bored look of a posh aristocrat.</pre>
+<details><summary>Prompt de la fiche personnage (image)</summary><pre id="sheet-PACHA">Character turnaround sheet, 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand. Pacha, a chubby orange tabby cat with bright green eyes, white chest and white front paws, half-closed eyelids and the bored look of a posh aristocrat. Front, three-quarter, side and back views, plus three expressions: bored, offended, blissful slow blink. Plain cream studio background, soft even light, clean image.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="cast-PACHA">Copier le bloc</button><button class="copy" type="button" data-copy="sheet-PACHA">Copier la fiche</button></div></div>
+<div class="card persona"><h3>Léa</h3><span class="role">La maîtresse · la trentaine</span><p class="small">Pull couleur sable, chignon châtain : elle reprend les couleurs de la marque. Une seule voix, chaleureuse et posée, dans toutes les vidéos.</p>
+<pre id="cast-LEA">Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.</pre>
+<details><summary>Prompt de la fiche personnage (image)</summary><pre id="sheet-LEA">Character turnaround sheet, 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand. Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings. Front, three-quarter, side and back views, plus full body in jeans and white sneakers, plus three expressions: warm smile, laughing, surprised. Plain cream studio background, soft even light, clean image.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="cast-LEA">Copier le bloc</button><button class="copy" type="button" data-copy="sheet-LEA">Copier la fiche</button></div></div>
+<div class="card persona"><h3>Le style et les décors</h3><span class="role">Communs à toutes les vidéos</span>
+<pre id="style-block">3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.</pre>
+<p class="small">Trois décors seulement : la cuisine crème et vert sauge, le salon, la salle de bain blanche. Ils reviennent d'une vidéo à l'autre comme chez le compte de référence.</p>
+<div class="actions"><button class="copy" type="button" data-copy="style-block">Copier le style</button></div></div>
+</div>
+<div class="card stack"><strong>Photos produit à joindre en référence</strong><p class="small">Les packshots de la boutique. Pour Orbe, garde la version bleue : c'est celle décrite dans les prompts.</p><div class="tw" style="border:0"><table><thead><tr><th>Produit</th><th>Prix</th><th>Photo de référence</th></tr></thead><tbody>
+<tr><td><strong>Naïa Tempo</strong><br><span class="small">Gamelle anti-glouton</span></td><td class="num">19,90 €</td><td><a href="https://naiapets.fr/assets/images/tempo/tempo-packshot.jpg" target="_blank" rel="noopener">/assets/images/tempo/tempo-packshot.jpg</a></td></tr>
+<tr><td><strong>Naïa Orbe</strong><br><span class="small">Gamelle à lécher rotative</span></td><td class="num">24,90 €</td><td><a href="https://naiapets.fr/assets/images/orbe/orbe-chien.webp" target="_blank" rel="noopener">/assets/images/orbe/orbe-chien.webp</a></td></tr>
+<tr><td><strong>Naïa Sérénité</strong><br><span class="small">Tapis de léchage</span></td><td class="num">14,90 €</td><td><a href="https://naiapets.fr/assets/images/tapis-lechage-packshot-optimized.webp" target="_blank" rel="noopener">/assets/images/tapis-lechage-packshot-optimized.webp</a></td></tr>
+<tr><td><strong>Naïa Explore</strong><br><span class="small">Tapis de fouille</span></td><td class="num">34,90 €</td><td><a href="https://naiapets.fr/assets/images/tapis-fouille-packshot-optimized.webp" target="_blank" rel="noopener">/assets/images/tapis-fouille-packshot-optimized.webp</a></td></tr>
+<tr><td><strong>Naïa Source</strong><br><span class="small">Fontaine à bec en inox</span></td><td class="num">79,90 €</td><td><a href="https://naiapets.fr/assets/images/fontaine-source/v3/packshot.webp" target="_blank" rel="noopener">/assets/images/fontaine-source/v3/packshot.webp</a></td></tr>
+<tr><td><strong>Naïa Malin</strong><br><span class="small">Jouet puzzle à friandises</span></td><td class="num">24,90 €</td><td><a href="https://naiapets.fr/assets/images/malin/malin-packshot-v2.jpg" target="_blank" rel="noopener">/assets/images/malin/malin-packshot-v2.jpg</a></td></tr>
+</tbody></table></div></div>
+<h2 id="series">5. Les 5 séries</h2>
+<p>Chaque série a son titre fixe en haut de l'écran pendant la première seconde (« Les Méchants de Noisette », « Le Frigo de Léa »…). On reconnaît la série, on attend le prochain épisode.</p>
+<div class="grid2">
+<div class="card serie"><span class="pill s-mechants">Les Méchants</span><p>Un aliment, une plante ou un problème prend vie et menace le chien ou le chat.</p><p class="small"><strong>Rôle :</strong> Partages et enregistrements : on envoie la vidéo pour protéger l'animal d'un proche.</p><p class="small">3 vidéo(s) dans ce lot</p></div>
+<div class="card serie"><span class="pill s-frigo">Le Frigo de Léa</span><p>Un aliment ami explique comment le servir, dans un produit Naïa.</p><p class="small"><strong>Rôle :</strong> Enregistrements et clics : la recette donne envie d'avoir le produit.</p><p class="small">2 vidéo(s) dans ce lot</p></div>
+<div class="card serie"><span class="pill s-face">Avant / Avec Naïa</span><p>L'objet habituel se vante, puis le produit Naïa montre la différence.</p><p class="small"><strong>Rôle :</strong> Ventes : c'est le format le plus direct, à réutiliser en pub.</p><p class="small">1 vidéo(s) dans ce lot</p></div>
+<div class="card serie"><span class="pill s-avis">Noisette (ou Pacha) a un avis</span><p>L'animal parle et dit tout haut ce que son maître n'a pas compris.</p><p class="small"><strong>Rôle :</strong> Commentaires et identification : « le mien fait pareil ».</p><p class="small">3 vidéo(s) dans ce lot</p></div>
+<div class="card serie"><span class="pill s-quiz">Le Quiz</span><p>Une question à l'écran, la réponse arrive à 4 secondes.</p><p class="small"><strong>Rôle :</strong> Commentaires : on répond avant la révélation, l'algorithme pousse la vidéo.</p><p class="small">1 vidéo(s) dans ce lot</p></div>
+<div class="card serie"><span class="pill s-quiz">La chanson</span><p>On la garde, mais plus seule : une vidéo sur six au maximum, par exemple une comptine courte pour Orbe (« il lèche, ça tourne »).</p><p class="small"><strong>Rôle :</strong> fidéliser les abonnés qui l'aiment déjà.</p></div>
+</div>
+<h2 id="calendrier">6. Calendrier</h2>
+<p>Deux vidéos par semaine, du 20 octobre au 24 novembre. Les dates suivent la saison : Halloween le samedi 31 octobre, la Toussaint le 1er novembre, le Black Friday le vendredi 27 novembre.</p>
+<div class="tw"><table><thead><tr><th>Date</th><th>Vidéo</th><th>Série</th><th>Produit</th><th>Mot-clé</th></tr></thead><tbody>
+<tr><td style="white-space:nowrap">mar. 20 oct.</td><td><a href="#v1">V1 · Châtaigne ou marron d'Inde ?</a></td><td><span class="pill s-quiz">Le Quiz</span></td><td>Naïa Explore</td><td><strong>FLAIR</strong></td></tr>
+<tr><td style="white-space:nowrap">ven. 23 oct.</td><td><a href="#v2">V2 · La gamelle jalouse</a></td><td><span class="pill s-face">Avant / Avec Naïa</span></td><td>Naïa Tempo</td><td><strong>TEMPO</strong></td></tr>
+<tr><td style="white-space:nowrap">dim. 25 oct.</td><td><a href="#v3">V3 · Le bonbon sans sucre</a></td><td><span class="pill s-mechants">Les Méchants</span></td><td>Naïa Sérénité</td><td><strong>CALME</strong></td></tr>
+<tr><td style="white-space:nowrap">mar. 27 oct.</td><td><a href="#v4">V4 · Le chrysanthème de la Toussaint</a></td><td><span class="pill s-mechants">Les Méchants</span></td><td>Aucun (portée)</td><td><strong>PLANTES</strong></td></tr>
+<tr><td style="white-space:nowrap">jeu. 29 oct.</td><td><a href="#v5">V5 · La citrouille d'Halloween</a></td><td><span class="pill s-frigo">Le Frigo de Léa</span></td><td>Naïa Orbe</td><td><strong>COURGE</strong></td></tr>
+<tr><td style="white-space:nowrap">mar. 3 nov.</td><td><a href="#v6">V6 · Pacha boit au robinet</a></td><td><span class="pill s-avis">Noisette (ou Pacha) a un avis</span></td><td>Naïa Source</td><td><strong>SOURCE</strong></td></tr>
+<tr><td style="white-space:nowrap">ven. 6 nov.</td><td><a href="#v7">V7 · Monsieur Ennui</a></td><td><span class="pill s-mechants">Les Méchants</span></td><td>Naïa Explore + Naïa Malin</td><td><strong>PLUIE</strong></td></tr>
+<tr><td style="white-space:nowrap">mar. 10 nov.</td><td><a href="#v8">V8 · 3 recettes à lécher</a></td><td><span class="pill s-frigo">Le Frigo de Léa</span></td><td>Naïa Sérénité</td><td><strong>RECETTE</strong></td></tr>
+<tr><td style="white-space:nowrap">ven. 13 nov.</td><td><a href="#v9">V9 · Les griffes sans drame</a></td><td><span class="pill s-avis">Noisette (ou Pacha) a un avis</span></td><td>Naïa Sérénité</td><td><strong>GRIFFES</strong></td></tr>
+<tr><td style="white-space:nowrap">mar. 24 nov.</td><td><a href="#v10">V10 · La lettre au Père Noël</a></td><td><span class="pill s-avis">Noisette (ou Pacha) a un avis</span></td><td>Naïa Malin + Naïa Explore</td><td><strong>NOËL</strong></td></tr>
+</tbody></table></div>
+<p class="small">Naïa Sérénité revient trois fois : c'est le produit le moins cher (14,90 €), le plus facile à acheter sur un coup de tête, et il a trois usages faciles à montrer (Halloween, recettes, toilettage).</p>
+<h2 id="scripts">7. Les 10 scripts</h2>
+<p>Pour chaque clip : le déroulé en français pour toi, la réplique, et le prompt complet à copier dans Omni (format, réplique, voix, style, personnages, produit, décor, plans minutés). Les répliques font 20 à 25 mots, ce qui tient en 10 secondes.</p>
+<article class="script" id="v1">
+<div class="s-head"><span class="s-num">V1</span><span class="pill s-quiz">Le Quiz</span><span class="s-date">mar. 20 oct.</span><h3>Châtaigne ou marron d'Inde ?</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Explore (34,90 €) · <strong>Objectif :</strong> Commentaires et enregistrements</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« L'un des deux peut rendre ton chien malade. Lequel ? »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Le Marron d'Inde</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Gros plan sur la truffe de Noisette qui renifle les feuilles mortes d'une allée de parc.</li><li><b>2-4 s</b> Deux fruits bruns s'éveillent sur les feuilles : un marron d'Inde brillant au sourire rusé, une châtaigne à la petite pointe, l'air inquiet.</li><li><b>4-10 s</b> Le marron d'Inde parle face caméra, sa bogue verte à piquants courts posée à côté de lui.</li></ul>
+<blockquote class="line">On se ressemble, hein ? Sauf que moi, je suis le marron d'Inde. Et pour ton chien, je suis toxique.<small>19 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v1-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the horse chestnut character, lip-synced: On se ressemble, hein ? Sauf que moi, je suis le marron d'Inde. Et pour ton chien, je suis toxique.
+Voice: low, smooth and sly French male voice.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The horse chestnut: a glossy dark-brown horse chestnut with a pale round spot, a cartoon face with a sly smug grin and thin raised eyebrows, tiny arms, sitting next to its split green husk with short sparse spikes.
+- The sweet chestnut: a smaller sweet chestnut with a pointed tuft on top and one flat side, big worried eyes, beside a very spiky brown husk.
+Setting: a park path under tall chestnut trees in October, golden and orange fallen leaves, soft low sun.
+Shots:
+- 0-2s: extreme close-up of Noisette's wet nose sniffing golden fallen leaves on the park path.
+- 2-4s: two brown nuts lying on the leaves wake up and open their eyes: the glossy horse chestnut with a sly grin and the smaller sweet chestnut, looking worried.
+- 4-10s: medium close-up of the horse chestnut talking to camera, its split green husk beside it, Noisette's curious face softly blurred in the background.
+Only the horse chestnut character moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v1-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Retour à la maison, pluie sur la vitre. Léa déplie le tapis Naïa Explore au sol et parle à la caméra.</li><li><b>3-6 s</b> Gros plan sur ses mains qui glissent des croquettes entre les pétales.</li><li><b>6-10 s</b> Noisette plonge la truffe dans le tapis, la queue qui remue.</li></ul>
+<blockquote class="line">En automne, la balade, c'est le nez au sol. Alors à la maison, je lui cache ses croquettes ici. Il fouille sans danger.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v1-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: En automne, la balade, c'est le nez au sol. Alors à la maison, je lui cache ses croquettes ici. Il fouille sans danger.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Explore: a paw-shaped snuffle mat made of many soft fabric petals and folds.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window. Rain drops run down the window.
+Shots:
+- 0-3s: Léa kneels on the kitchen floor and unfolds the snuffle mat, talking to camera, rain on the window behind her.
+- 3-6s: close-up of her hands tucking kibble between the fabric petals of the mat.
+- 6-10s: Noisette dives his nose into the petals, sniffing with joy, tail wagging fast.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v1-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>0-2 s : l'accroche en gros, puis « Réponds en commentaire avant la fin ».</li>
+<li>Pendant le clip A, deux étiquettes : « Marron d'Inde : bogue verte à piquants courts, 1 ou 2 fruits ronds et lisses » et « Châtaigne : bogue très piquante, plusieurs fruits avec une pointe ».</li>
+<li>« Marron d'Inde avalé : vomissements, diarrhée, douleurs au ventre. »</li>
+<li>« Châtaigne : la bogue blesse, et un fruit avalé entier peut rester coincé. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Il en a mangé ? Appelle ton vétérinaire. · Naïa Explore, le tapis de fouille · 34,90 € · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v1" style="margin:0">Châtaigne ou marron d'Inde : tu aurais su faire la différence ? 🌰
+L'un des deux est toxique pour ton chien. Dis-nous en commentaire si tu avais trouvé avant la fin.
+
+Au parc en ce moment : rappel, et truffe surveillée sous les marronniers.
+À la maison, son flair travaille sans danger avec le tapis de fouille Naïa Explore.
+
+👉 Commente FLAIR et on t'envoie le lien + ton code −10 %.
+#chien #conseilchien #automne #beagle #bienetreanimal #naiapets</pre>
+<pre id="pin-v1" hidden>Naïa Explore : https://naiapets.fr/produit-tapis-fouille.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v01-marron · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v1">Copier la légende</button><button class="copy" type="button" data-copy="pin-v1">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>FLAIR</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-tapis-fouille.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v01-marron</code></dd>
+<dt>Article lié</dt><dd>à créer : « Marron d'Inde, gland, châtaigne : ce que ton chien croise en automne »</dd>
+</dl></div>
+<p class="safety">Ne jamais faire vomir soi-même : on appelle le vétérinaire.</p>
+</article>
+<article class="script" id="v2">
+<div class="s-head"><span class="s-num">V2</span><span class="pill s-face">Avant / Avec Naïa</span><span class="s-date">ven. 23 oct.</span><h3>La gamelle jalouse</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Tempo (19,90 €) · <strong>Objectif :</strong> Ventes, puis réutilisation en pub</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Ton chien finit sa gamelle en 30 secondes ? »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : La vieille gamelle</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Vue de dessus : Noisette aspire ses croquettes dans une gamelle en inox cabossée, des croquettes volent.</li><li><b>2-4 s</b> La gamelle ouvre de grands yeux et brandit un chronomètre, très fière.</li><li><b>4-10 s</b> Elle commente comme au stade. Derrière elle, Noisette a le hoquet.</li></ul>
+<blockquote class="line">Record battu ! Vingt-huit secondes ! Avec moi, il avale tout sans respirer. Bon… après, il a le hoquet. Et parfois, tout ressort.<small>21 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v2-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the old steel bowl, lip-synced: Record battu ! Vingt-huit secondes ! Avec moi, il avale tout sans respirer. Bon… après, il a le hoquet. Et parfois, tout ressort.
+Voice: fast, excited French sports-commentator voice.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The old bowl: a dented classic stainless-steel dog bowl with big cartoon eyes, a wide proud grin and tiny arms holding a stopwatch.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window.
+Shots:
+- 0-2s: top-down shot of Noisette gobbling kibble at full speed from the old steel bowl, kibble bouncing out onto the tiles.
+- 2-4s: the steel bowl opens its big cartoon eyes and lifts the tiny stopwatch, beaming with pride.
+- 4-10s: close-up of the bowl talking excitedly to camera like a sports commentator; behind it, Noisette hiccups with a surprised face.
+Only the old steel bowl moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v2-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa pose la gamelle Naïa Tempo vert sauge et verse les croquettes dans les spirales.</li><li><b>3-7 s</b> Noisette mange lentement, il va chercher chaque croquette entre les reliefs.</li><li><b>7-10 s</b> Au fond, sur le plan de travail, la vieille gamelle boude, bras croisés.</li></ul>
+<blockquote class="line">Dans les spirales, il va chercher chaque croquette. Le repas dure plusieurs minutes au lieu de quelques secondes. Et la vieille gamelle boude.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v2-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: Dans les spirales, il va chercher chaque croquette. Le repas dure plusieurs minutes au lieu de quelques secondes. Et la vieille gamelle boude.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The old bowl from the previous shot: a dented stainless-steel dog bowl with big cartoon eyes and tiny arms, keeping its mouth closed.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Tempo: a round sage green slow-feeder bowl about 20 cm wide with a raised spiral maze inside and a matte finish.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window.
+Shots:
+- 0-3s: Léa crouches, places the sage green spiral bowl on the tiles and pours kibble into the spiral grooves while talking to camera.
+- 3-7s: low close-up of Noisette eating slowly, nudging kibble out of the spiral grooves with his tongue, calm and focused.
+- 7-10s: on the worktop in the background, the old steel bowl sulks with its tiny arms crossed while Noisette keeps eating calmly in the foreground.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v2-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>Chrono à l'écran pendant le clip A : « 0:28 ». Pendant le clip B : « plusieurs minutes » (aucun chiffre inventé).</li>
+<li>« Manger trop vite : il avale de l'air et peut régurgiter. »</li>
+<li>Petite ligne : « Régurgitations fréquentes ? Parles-en à ton vétérinaire. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Tempo · 19,90 € · Duo 34,90 € · livraison offerte · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v2" style="margin:0">Ton chien aussi bat des records à la gamelle ? 🏁
+Manger trop vite, c'est avaler de l'air avec les croquettes. Et parfois, tout ressort.
+Avec la gamelle Naïa Tempo, il va chercher chaque bouchée dans les spirales : le repas s'étale sur plusieurs minutes.
+
+« Nous sommes passés de 45 secondes à presque 2 minutes et demie » : avis d'un acheteur de ce modèle, publié sur l'annonce fournisseur.
+
+👉 Commente TEMPO et on t'envoie le lien + ton code −10 %.
+#chien #chienglouton #astucechien #beagle #naiapets</pre>
+<pre id="pin-v2" hidden>Naïa Tempo : https://naiapets.fr/produit-gamelle-tempo.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v02-gamelle-jalouse · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v2">Copier la légende</button><button class="copy" type="button" data-copy="pin-v2">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>TEMPO</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-gamelle-tempo.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v02-gamelle-jalouse</code></dd>
+<dt>Article lié</dt><dd><a href="https://naiapets.fr/blog-chien-mange-trop-vite-que-faire.html" target="_blank" rel="noopener">blog-chien-mange-trop-vite-que-faire.html</a></dd>
+</dl></div>
+<p class="safety">On ne promet rien contre la torsion d'estomac : on parle seulement de ralentir le repas.</p>
+</article>
+<article class="script" id="v3">
+<div class="s-head"><span class="s-num">V3</span><span class="pill s-mechants">Les Méchants</span><span class="s-date">dim. 25 oct.</span><h3>Le bonbon sans sucre</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Sérénité (14,90 €) · <strong>Objectif :</strong> Partages, puis clics vers le tapis</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Ce bonbon est plus traître que le chocolat »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Monsieur Sans-Sucre</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Un saladier de bonbons d'Halloween sur la table basse. Les yeux de Noisette dépassent juste du bord.</li><li><b>2-4 s</b> Un paquet de chewing-gums à la menthe ouvre les yeux, sourire en coin.</li><li><b>4-10 s</b> Il chuchote face caméra, petite cape noire sur le dos.</li></ul>
+<blockquote class="line">Tout le monde surveille le chocolat. Moi, je suis sans sucre, au xylitol. Et pour un petit chien, quelques chewing-gums suffisent.<small>21 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v3-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the chewing gum character, lip-synced: Tout le monde surveille le chocolat. Moi, je suis sans sucre, au xylitol. Et pour un petit chien, quelques chewing-gums suffisent.
+Voice: soft, whispery, sneaky French male voice.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The chewing gum: a mint-green pack of chewing gum with a plain white stripe, a cartoon face with half-closed eyes and a thin sneaky smile, wearing a tiny black Halloween cape.
+Setting: a cozy living room with a light oak floor, a sand-colored sofa, a cream wool rug, green plants and a tall window. It is evening, decorated for Halloween with glowing pumpkin lanterns and purple and orange candlelight.
+Shots:
+- 0-2s: a bowl of Halloween candies on a low coffee table; Noisette's eyes and ears peek just above the table edge.
+- 2-4s: the chewing gum pack in the candy bowl slowly opens its half-closed eyes and gives a sneaky smile.
+- 4-10s: close-up of the chewing gum pack whispering to camera, candlelight flickering on its cape.
+Only the chewing gum character moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v3-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa pose le saladier de bonbons tout en haut d'une étagère.</li><li><b>3-6 s</b> Dans une petite pièce calme, elle colle le tapis Naïa Sérénité au carrelage et y étale du yaourt nature.</li><li><b>6-10 s</b> Noisette lèche tranquillement ; au loin, des enfants déguisés sonnent à la porte.</li></ul>
+<blockquote class="line">Ce soir, les bonbons montent en hauteur. Et pendant que ça sonne à la porte, Noisette reste au calme avec son tapis.<small>22 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v3-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: Ce soir, les bonbons montent en hauteur. Et pendant que ça sonne à la porte, Noisette reste au calme avec son tapis.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Sérénité: a soft olive green square silicone lick mat with rounded corners, covered with small textured patterns, held by small suction cups.
+Setting: a cozy living room with a light oak floor, a sand-colored sofa, a cream wool rug, green plants and a tall window. It is Halloween evening; Léa wears a small witch-hat headband over her bun.
+Shots:
+- 0-3s: Léa lifts the candy bowl onto the top shelf of a bookcase and talks to camera.
+- 3-6s: in a quiet small room with white floor tiles, she presses the olive green lick mat onto the floor and spreads a thin layer of plain white yogurt.
+- 6-10s: Noisette lies down and licks the mat peacefully under soft lamp light; through the half-open door, blurred children in costumes stand at the front door far away.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v3-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>« Xylitol : chewing-gums et bonbons « sans sucre », certains produits allégés. Lis les étiquettes. »</li>
+<li>« Il en a avalé ? Vétérinaire tout de suite, même s'il a l'air bien. »</li>
+<li>« Urgence : CNITV 04 78 87 10 40 · CAPAE Ouest 02 40 68 77 40 » (numéros à revérifier le jour de la publication).</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Sérénité, le tapis de léchage · 14,90 € · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v3" style="margin:0">Le chocolat, tout le monde s'en méfie. Le xylitol, beaucoup moins. 🍬
+Cet édulcorant se cache dans des chewing-gums et des bonbons « sans sucre ». Chez le chien, il peut faire chuter la glycémie en moins d'une heure.
+
+Le soir d'Halloween : bonbons en hauteur, sacs des enfants fermés, et un coin calme pour lui pendant que la sonnette chauffe.
+
+Il en a avalé ? Appelle ton vétérinaire tout de suite, même s'il a l'air bien.
+Enregistre la vidéo et envoie-la à quelqu'un qui a un chien.
+👉 Commente CALME et on t'envoie le lien du tapis Naïa Sérénité.
+#halloween #chien #securitechien #xylitol #naiapets</pre>
+<pre id="pin-v3" hidden>Naïa Sérénité : https://naiapets.fr/produit-tapis-lechage.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v03-xylitol · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v3">Copier la légende</button><button class="copy" type="button" data-copy="pin-v3">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>CALME</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-tapis-lechage.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v03-xylitol</code></dd>
+<dt>Article lié</dt><dd>à créer : « Xylitol et chien : où il se cache et que faire »</dd>
+</dl></div>
+<p class="safety">La vidéo informe, elle ne remplace pas le vétérinaire : la carte de fin le dit.</p>
+</article>
+<article class="script" id="v4">
+<div class="s-head"><span class="s-num">V4</span><span class="pill s-mechants">Les Méchants</span><span class="s-date">mar. 27 oct.</span><h3>Le chrysanthème de la Toussaint</h3></div>
+<p class="meta"><strong>Produit :</strong> Aucun produit · <strong>Objectif :</strong> Portée pure : partages, nouveaux abonnés</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Tu vas en acheter un cette semaine. Ton chat, lui, va le goûter. »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Le Chrysanthème</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Un gros pot de chrysanthèmes cuivrés posé au sol, dans l'entrée.</li><li><b>2-4 s</b> Pacha s'approche, renifle une feuille et ouvre la bouche pour la mâchouiller.</li><li><b>4-10 s</b> La fleur du centre s'éveille, moustache de pétales, ton de tragédien. Pacha se fige, une patte levée.</li></ul>
+<blockquote class="line">Tous les ans, on m'achète par millions pour la Toussaint. Et tous les ans, des chats mâchouillent mes feuilles… puis vomissent et bavent.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v4-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the chrysanthemum character, lip-synced: Tous les ans, on m'achète par millions pour la Toussaint. Et tous les ans, des chats mâchouillent mes feuilles… puis vomissent et bavent.
+Voice: theatrical, old-fashioned French male voice, like a stage actor.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Pacha, a chubby orange tabby cat with bright green eyes, white chest and white front paws, half-closed eyelids and the bored look of a posh aristocrat.
+- The chrysanthemum: a large terracotta pot of bronze-orange chrysanthemums; the central flower has a theatrical old-fashioned face with a curled mustache made of petals and dramatic eyebrows.
+Setting: a bright entrance hall with a light oak floor, a cream wall, a coat rack and the front door.
+Shots:
+- 0-2s: the large pot of bronze-orange chrysanthemums on the floor next to the front door.
+- 2-4s: Pacha walks in, sniffs a leaf and opens his mouth to nibble it.
+- 4-10s: the central flower wakes up and speaks dramatically to camera while Pacha freezes with one paw raised.
+Only the chrysanthemum character moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v4-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa sort le pot dehors, sur le pas de la porte.</li><li><b>3-6 s</b> Elle pose un pot d'herbe à chat sur le rebord de la fenêtre.</li><li><b>6-10 s</b> Pacha mâchouille l'herbe à chat, les yeux mi-clos de bonheur.</li></ul>
+<blockquote class="line">Le chrysanthème, c'est dehors. Pour Pacha, de l'herbe à chat. Et les lys, jamais à la maison : pour un chat, c'est encore pire.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v4-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: Le chrysanthème, c'est dehors. Pour Pacha, de l'herbe à chat. Et les lys, jamais à la maison : pour un chat, c'est encore pire.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Pacha, a chubby orange tabby cat with bright green eyes, white chest and white front paws, half-closed eyelids and the bored look of a posh aristocrat.
+Setting: the same bright entrance hall, then a sunny windowsill in the living room.
+Shots:
+- 0-3s: Léa carries the chrysanthemum pot out through the front door, sets it down on the doorstep and talks over her shoulder to camera.
+- 3-6s: she places a small pot of fresh green cat grass on a sunny windowsill.
+- 6-10s: Pacha happily nibbles the cat grass, eyes half-closed with pleasure.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v4-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>« Chrysanthème mâchouillé : vomissements, bave, diarrhée, parfois troubles de l'équilibre. »</li>
+<li>« Lys : chez le chat, même le pollen ou l'eau du vase peuvent abîmer les reins. »</li>
+<li>« Pour la tombe, parfait. Pour le salon, beaucoup moins. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Une plante mâchouillée et un doute ? Appelle ton vétérinaire. · Naïa Pets · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v4" style="margin:0">Le chrysanthème de la Toussaint, ton chat le trouve très intéressant. Trop. 🌼
+Mâchouillé, il peut le faire vomir, baver, avoir la diarrhée.
+Et si tu as des lys à la maison : chez le chat, même un peu de pollen peut abîmer les reins. Ceux-là, on ne les garde pas à l'intérieur.
+
+Partage à quelqu'un qui achète ses chrysanthèmes cette semaine.
+👉 Commente PLANTES et on t'envoie notre liste des plantes à éviter.
+#chat #chatdefrance #toussaint #plantestoxiques #naiapets</pre>
+<pre id="pin-v4" hidden>Notre liste des plantes à éviter arrive en message privé : commente PLANTES.</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v4">Copier la légende</button><button class="copy" type="button" data-copy="pin-v4">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>PLANTES</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Article lié</dt><dd>à créer : « Plantes toxiques pour chat et chien : la liste de saison »</dd>
+</dl></div>
+<p class="safety">Aucun produit : c'est la vidéo « cadeau » qui fait connaître le compte.</p>
+</article>
+<article class="script" id="v5">
+<div class="s-head"><span class="s-num">V5</span><span class="pill s-frigo">Le Frigo de Léa</span><span class="s-date">jeu. 29 oct.</span><h3>La citrouille d'Halloween</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Orbe (24,90 €) · <strong>Objectif :</strong> Enregistrements et clics vers Orbe</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Le seul truc d'Halloween que ton chien a le droit de manger »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : La Citrouille</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Table de cuisine décorée pour Halloween. Une citrouille ronde, non creusée, ouvre les yeux et sourit.</li><li><b>2-6 s</b> Elle parle avec douceur ; la tête de Noisette est posée au bord de la table.</li><li><b>6-10 s</b> Elle désigne de sa tige un panier de coloquintes décoratives, qui baissent les yeux.</li></ul>
+<blockquote class="line">Cuite, nature, une petite cuillère : je suis la copine de son ventre. Mais ma cousine décorative, là ? Elle, on ne la mange pas !<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v5-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the pumpkin character, lip-synced: Cuite, nature, une petite cuillère : je suis la copine de son ventre. Mais ma cousine décorative, là ? Elle, on ne la mange pas !
+Voice: warm, cheerful, grandmotherly French female voice.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The pumpkin: a plain round orange pumpkin, uncarved, with rosy cheeks, a warm kind smile and a curly green stem like a tuft of hair.
+- The decorative gourds: a wicker basket of small knobbly striped decorative gourds with tiny guilty faces, keeping their mouths closed.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window. The kitchen table is decorated for Halloween with small lanterns and autumn leaves.
+Shots:
+- 0-2s: the plain round pumpkin in the middle of the decorated table opens its eyes and smiles warmly.
+- 2-6s: medium close-up of the pumpkin talking kindly to camera; Noisette's head rests on the table edge, listening with big eyes.
+- 6-10s: the pumpkin turns and points its stem toward the basket of decorative gourds, which look guilty and shy away.
+Only the pumpkin character moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v5-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa étale une fine couche de purée de courge autour de la balle jaune du bol Naïa Orbe bleu.</li><li><b>3-6 s</b> Elle pose le bol au sol devant Noisette, assis bien sage.</li><li><b>6-10 s</b> Gros plan : à chaque coup de langue, la balle tourne et remonte un peu de purée.</li></ul>
+<blockquote class="line">Une fine couche de purée de courge sous la balle, et voilà son dessert d'Halloween. Chaque coup de langue fait tourner la balle.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v5-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: Une fine couche de purée de courge sous la balle, et voilà son dessert d'Halloween. Chaque coup de langue fait tourner la balle.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Orbe: a compact round blue lick bowl with a bright yellow ball set in its center; the ball rotates with every lick.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window.
+Shots:
+- 0-3s: close-up of Léa's hands spreading a thin layer of smooth orange pumpkin purée into the blue lick bowl around the yellow ball, then Léa smiling and talking to camera.
+- 3-6s: she places the bowl on the terracotta tiles in front of Noisette, who sits politely with his ears up.
+- 6-10s: macro shot: Noisette licks, and with every lick the yellow ball rotates and brings up a thin layer of orange purée; his tail wags softly.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v5-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>« Courge ou potiron : cuit, nature, sans sel, sans sucre, sans épices. »</li>
+<li>« Une petite quantité, à retirer de sa ration du jour. »</li>
+<li>« Coloquintes et citrouilles de déco : jamais dans la gamelle. »</li>
+<li>« Format compact : chats, chiots, petits et moyens chiens. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Orbe, la gamelle à lécher rotative · 24,90 € · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v5" style="margin:0">Le seul invité d'Halloween que Noisette a le droit de goûter 🎃
+La courge cuite, nature, sans sel ni épices, en petite quantité : beaucoup de chiens adorent.
+Les citrouilles décoratives et les coloquintes, elles, restent sur la table.
+
+Notre astuce : une fine couche dans le bol Naïa Orbe. Il lèche, la balle tourne, il recommence.
+
+👉 Commente COURGE et on t'envoie le lien + ton code −10 %.
+#halloween #chien #recettechien #friandisemaison #naiapets</pre>
+<pre id="pin-v5" hidden>Naïa Orbe : https://naiapets.fr/produit-gamelle-orbe.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v05-citrouille · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v5">Copier la légende</button><button class="copy" type="button" data-copy="pin-v5">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>COURGE</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-gamelle-orbe.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v05-citrouille</code></dd>
+<dt>Article lié</dt><dd><a href="https://naiapets.fr/blog-tapis-lechage-chien-quoi-mettre.html" target="_blank" rel="noopener">blog-tapis-lechage-chien-quoi-mettre.html</a></dd>
+</dl></div>
+<p class="safety">Orbe ne va pas au congélateur dans ce script : une purée gelée bloquerait la balle.</p>
+</article>
+<article class="script" id="v6">
+<div class="s-head"><span class="s-num">V6</span><span class="pill s-avis">Noisette (ou Pacha) a un avis</span><span class="s-date">mar. 3 nov.</span><h3>Pacha boit au robinet</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Source (79,90 €) · <strong>Objectif :</strong> Ventes de la fontaine (panier le plus élevé)</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Ton chat boit au robinet ? Il essaie de te dire quelque chose. »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Pacha</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Pacha perché sur le bord de l'évier lape le filet d'eau du robinet.</li><li><b>2-4 s</b> Sa gamelle d'eau au sol : un poil flotte à la surface.</li><li><b>4-10 s</b> Pacha tourne lentement la tête vers la caméra, l'air blasé.</li></ul>
+<blockquote class="line">L'eau qui dort dans un bol depuis hier ? Très peu pour moi. Moi, je bois l'eau qui coule. Comme tout chat de prestige.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v6-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Pacha, lip-synced: L'eau qui dort dans un bol depuis hier ? Très peu pour moi. Moi, je bois l'eau qui coule. Comme tout chat de prestige.
+Voice: slow, posh, deadpan French male voice, like a bored aristocrat.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Pacha, a chubby orange tabby cat with bright green eyes, white chest and white front paws, half-closed eyelids and the bored look of a posh aristocrat.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window.
+Shots:
+- 0-2s: Pacha perched on the edge of the kitchen sink, lapping a thin stream of water from the tap.
+- 2-4s: cut to a plain ceramic water bowl on the floor, still water with a single cat hair floating on the surface.
+- 4-10s: close-up of Pacha slowly turning his head to camera and speaking with half-closed eyes, water drops on his whiskers.
+Only Pacha moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v6-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa pose la fontaine Naïa Source en inox dans un coin calme de la cuisine.</li><li><b>3-6 s</b> Pacha s'approche : le capteur déclenche un filet d'eau qui coule du bec.</li><li><b>6-10 s</b> Pacha boit au filet, puis cligne lentement des yeux, satisfait. L'évier est vide.</li></ul>
+<blockquote class="line">Beaucoup de chats préfèrent l'eau qui coule. Celle-ci se déclenche quand il approche. Résultat : monsieur a quitté l'évier.<small>18 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v6-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: Beaucoup de chats préfèrent l'eau qui coule. Celle-ci se déclenche quand il approche. Résultat : monsieur a quitté l'évier.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Pacha, a chubby orange tabby cat with bright green eyes, white chest and white front paws, half-closed eyelids and the bored look of a posh aristocrat.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Source: a brushed stainless-steel pet water fountain with a curved metal spout that pours a thin stream of water onto a round stainless tray, with a slim vertical water-level window on the front.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window.
+Shots:
+- 0-3s: Léa places the stainless-steel fountain on the terracotta floor in a quiet corner of the kitchen and talks to camera.
+- 3-6s: Pacha walks toward the fountain; as he gets close, a thin stream of water starts pouring from the curved metal spout onto the tray, sparkling in the light.
+- 6-10s: close-up of Pacha drinking from the stream, then giving a slow satisfied blink; the kitchen sink in the background is empty and dry.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v6-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>« Le chat boit naturellement peu : l'eau doit lui donner envie. »</li>
+<li>« Capteur jusqu'à 1,5 m · l'eau coule 15 s quand il approche · inox 304 · sans fil. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Source · 79,90 € · 3 filtres inclus · livraison offerte · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v6" style="margin:0">Pacha a un avis sur l'eau de sa gamelle. Et il n'est pas le seul. 🚰
+Beaucoup de chats préfèrent l'eau qui coule, comme celle du robinet. Si le tien squatte l'évier, c'est peut-être pour ça.
+
+La fontaine Naïa Source se déclenche quand il approche : un filet d'eau, comme au robinet. En inox, sans fil, 3 filtres inclus.
+
+Ton chat boit au robinet ? Dis-le en commentaire.
+👉 Commente SOURCE et on t'envoie le lien + ton code −10 %.
+#chat #chatdefrance #hydratationchat #fontainechat #naiapets</pre>
+<pre id="pin-v6" hidden>Naïa Source : https://naiapets.fr/produit-fontaine-source.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v06-robinet · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v6">Copier la légende</button><button class="copy" type="button" data-copy="pin-v6">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>SOURCE</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-fontaine-source.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v06-robinet</code></dd>
+<dt>Article lié</dt><dd><a href="https://naiapets.fr/blog-pourquoi-mon-chat-ne-boit-pas-assez.html" target="_blank" rel="noopener">blog-pourquoi-mon-chat-ne-boit-pas-assez.html</a></dd>
+</dl></div>
+<p class="safety">On ne dit pas que la fontaine fait boire plus : on dit que beaucoup de chats préfèrent l'eau qui coule.</p>
+</article>
+<article class="script" id="v7">
+<div class="s-head"><span class="s-num">V7</span><span class="pill s-mechants">Les Méchants</span><span class="s-date">ven. 6 nov.</span><h3>Monsieur Ennui</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Explore (34,90 €) + Naïa Malin (24,90 €) · <strong>Objectif :</strong> Clics vers Explore et Malin</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Ce monstre débarque à chaque jour de pluie »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Monsieur Ennui</small></h4>
+<ul class="beats"><li><b>0-2 s</b> La pluie ruisselle sur la fenêtre. Noisette, étalé sur le tapis, pousse un long soupir.</li><li><b>2-4 s</b> Un petit nuage gris tout duveteux entre en flottant, une bruine sous lui.</li><li><b>4-10 s</b> Il s'installe sur l'accoudoir du canapé et parle ; Noisette lorgne un coussin.</li></ul>
+<blockquote class="line">Pas de grande balade aujourd'hui ? Parfait, je m'installe. Dans une heure, il mâche le coussin. Dans deux heures, tes chaussures.<small>20 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v7-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the grey cloud creature, lip-synced: Pas de grande balade aujourd'hui ? Parfait, je m'installe. Dans une heure, il mâche le coussin. Dans deux heures, tes chaussures.
+Voice: slow, yawning, lazy French male voice.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The cloud creature: a small fluffy grey rain-cloud creature the size of a cushion, droopy sleepy eyes, a lazy crooked grin, a light drizzle falling beneath it.
+Setting: a cozy living room with a light oak floor, a sand-colored sofa, a cream wool rug, green plants and a tall window. It is a grey rainy afternoon.
+Shots:
+- 0-2s: rain streaming down the tall living room window; Noisette lies flat on the cream rug, chin on his paws, and lets out a long sigh.
+- 2-4s: the small grey cloud creature floats into the room, drizzling softly.
+- 4-10s: the cloud creature settles on the sofa armrest and talks lazily to camera while Noisette eyes a sofa cushion with a mischievous look.
+Only the grey cloud creature moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v7-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa cache des croquettes dans le tapis Naïa Explore et quelques friandises dans la boule Naïa Malin.</li><li><b>3-7 s</b> Noisette fouille, puis pousse la boule : à chaque croquette trouvée, le nuage rétrécit.</li><li><b>7-10 s</b> Le nuage disparaît dans un petit « pouf ». Noisette s'endort, repu.</li></ul>
+<blockquote class="line">Jour de pluie ? Je fais travailler son nez. Il cherche, il pousse, il réfléchit… et Monsieur Ennui disparaît.<small>18 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v7-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Léa, lip-synced: Jour de pluie ? Je fais travailler son nez. Il cherche, il pousse, il réfléchit… et Monsieur Ennui disparaît.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The cloud creature from the previous shot, keeping its mouth closed.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Explore: a paw-shaped snuffle mat made of many soft fabric petals and folds.
+- Naïa Malin: an ivory treat puzzle ball about 10 cm wide with a transparent dome that shows the treats inside.
+Setting: a cozy living room with a light oak floor, a sand-colored sofa, a cream wool rug, green plants and a tall window.
+Shots:
+- 0-3s: Léa sits on the rug, tucking kibble into the snuffle mat and dropping a few treats into the ivory puzzle ball, talking to camera.
+- 3-7s: Noisette sniffs eagerly through the fabric petals, then nudges the puzzle ball with his nose so treats drop out; the grey cloud creature shrinks a little each time.
+- 7-10s: the tiny cloud vanishes with a soft puff of mist; Noisette curls up asleep next to the mat, content.
+Only Léa moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v7-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>Carte « étude » de 2 s, comme le fait le compte de référence : « Après 2 semaines d'activités de flair, des chiens se sont montrés plus « optimistes » dans un test de comportement. Duranton &amp; Horowitz, Applied Animal Behaviour Science, 2019 (20 chiens). »</li>
+<li>« Toujours sous surveillance, rangé après la séance. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Explore 34,90 € · Naïa Malin 24,90 € · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v7" style="margin:0">Monsieur Ennui adore les jours de pluie. Ton canapé, beaucoup moins. 🌧️
+Quand la balade est courte, on fait travailler son nez : chercher ses croquettes dans le tapis de fouille, pousser la boule à friandises.
+
+Une petite étude de 2019 (Duranton &amp; Horowitz) a observé que des chiens entraînés au flair pendant 2 semaines se montraient plus « optimistes » dans un test de comportement.
+
+👉 Commente PLUIE et on t'envoie les liens + ton code −10 %.
+#chien #chienheureux #enrichissement #jourdepluie #naiapets</pre>
+<pre id="pin-v7" hidden>Naïa Explore : https://naiapets.fr/produit-tapis-fouille.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v07-ennui · −10 % sur ta 1re commande avec le code NAIA10 · Naïa Malin : https://naiapets.fr/produit-jouet-malin.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v07-ennui</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v7">Copier la légende</button><button class="copy" type="button" data-copy="pin-v7">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>PLUIE</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-tapis-fouille.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v07-ennui</code></dd>
+<dt>Article lié</dt><dd><a href="https://naiapets.fr/blog-tapis-fouille-chien-enrichissement.html" target="_blank" rel="noopener">blog-tapis-fouille-chien-enrichissement.html</a></dd>
+</dl></div>
+<p class="safety">L'étude est petite : on la cite telle quelle, sans en faire une promesse.</p>
+</article>
+<article class="script" id="v8">
+<div class="s-head"><span class="s-num">V8</span><span class="pill s-frigo">Le Frigo de Léa</span><span class="s-date">mar. 10 nov.</span><h3>3 recettes à lécher</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Sérénité (14,90 €) · <strong>Objectif :</strong> Enregistrements et ventes du Trio</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« 3 recettes à lécher, avec ce que tu as déjà au frigo »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Léa (voix off)</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Vue de dessus : les mains de Léa étalent du yaourt nature sur le tapis Naïa Sérénité. Texte « 1. Yaourt nature ».</li><li><b>3-6 s</b> Purée de courge sur un deuxième tapis. Texte « 2. Courge cuite ».</li><li><b>6-10 s</b> Banane écrasée sur un troisième tapis, puis les trois partent au frais. Texte « 3. Banane écrasée ».</li></ul>
+<blockquote class="line">Un : yaourt nature. Deux : purée de courge cuite. Trois : banane écrasée. Une fine couche, et une heure au congélateur.<small>19 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v8-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Voice-over in French, narrated off-screen by Léa; on screen, every character keeps their lips still: Un : yaourt nature. Deux : purée de courge cuite. Trois : banane écrasée. Une fine couche, et une heure au congélateur.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Hands: Léa's hands with a sand-colored knit sleeve.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Sérénité: a soft olive green square silicone lick mat with rounded corners, covered with small textured patterns, held by small suction cups.
+Setting: a light oak worktop seen from above, soft morning light.
+Shots:
+- 0-3s: top-down shot: hands spread a thin layer of plain white yogurt over the textured olive green silicone mat.
+- 3-6s: top-down shot: hands spread smooth orange pumpkin purée over a second identical mat.
+- 6-10s: top-down shot: hands spread a thin layer of mashed banana over a third identical mat, then slide the three mats onto a freezer shelf.
+All mouths stay closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v8-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Le Yaourt nature</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Noisette lèche le tapis collé au carrelage, l'air béat.</li><li><b>3-6 s</b> Sur le plan de travail, un petit pot de yaourt nature s'anime et lève un doigt.</li><li><b>6-10 s</b> Il fait la leçon ; dans le frigo ouvert, un yaourt aux fruits et un yaourt allégé baissent les yeux.</li></ul>
+<blockquote class="line">Moi, nature et sans sucre, d'accord. Mais mes cousins sucrés, aux fruits ou à l'édulcorant ? Ils restent au frigo !<small>19 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v8-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by the yogurt pot character, lip-synced: Moi, nature et sans sucre, d'accord. Mais mes cousins sucrés, aux fruits ou à l'édulcorant ? Ils restent au frigo !
+Voice: brisk, strict but funny French female voice, like a school teacher.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+- The yogurt pot: a small glass pot of plain white yogurt with a cartoon face and one tiny raised finger, like a strict teacher.
+- The cousins: a pink fruit yogurt pot and a pale diet yogurt pot on the open fridge shelf, with embarrassed faces, keeping their mouths closed.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Sérénité: a soft olive green square silicone lick mat with rounded corners, covered with small textured patterns, held by small suction cups.
+Setting: a bright French family kitchen with cream walls, sage green cabinets, a light oak worktop, hexagonal terracotta floor tiles and soft morning light from a tall window.
+Shots:
+- 0-3s: low shot of Noisette blissfully licking the olive green mat stuck to the terracotta floor.
+- 3-6s: on the worktop above, the yogurt pot opens its eyes and raises one tiny finger.
+- 6-10s: close-up of the yogurt pot lecturing to camera; behind it in the open fridge, the two cousins look down, embarrassed.
+Only the yogurt pot character moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v8-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>Les trois numéros en gros, un par plan (style liste, très enregistrable).</li>
+<li>« Petite quantité, prélevée sur sa ration du jour. »</li>
+<li>« À éviter : xylitol, chocolat, raisin, oignon, ail. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Sérénité · 14,90 € · Trio 32,90 € · guide recettes offert · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v8" style="margin:0">3 recettes à lécher, zéro courses à faire 🥄
+1. Yaourt nature, sans sucre ni édulcorant
+2. Purée de courge cuite, sans sel
+3. Banane bien écrasée
+Une fine couche sur le tapis, et au frais.
+Toujours en petite quantité, à retirer de sa ration du jour. Et jamais de xylitol, chocolat, raisin, oignon ou ail.
+
+Envie d'autres idées ? Le guide recettes est offert avec le tapis Naïa Sérénité.
+👉 Commente RECETTE et on t'envoie le lien + ton code −10 %.
+#recettechien #tapisdelechage #chien #astucechien #naiapets</pre>
+<pre id="pin-v8" hidden>Naïa Sérénité : https://naiapets.fr/produit-tapis-lechage.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v08-recettes · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v8">Copier la légende</button><button class="copy" type="button" data-copy="pin-v8">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>RECETTE</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-tapis-lechage.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v08-recettes</code></dd>
+<dt>Article lié</dt><dd><a href="https://naiapets.fr/blog-tapis-lechage-chien-quoi-mettre.html" target="_blank" rel="noopener">blog-tapis-lechage-chien-quoi-mettre.html</a></dd>
+</dl></div>
+<p class="safety">Avant de tirer : vérifie sur la notice que le tapis va au congélateur. Sinon, remplace par « une heure au frigo ».</p>
+</article>
+<article class="script" id="v9">
+<div class="s-head"><span class="s-num">V9</span><span class="pill s-avis">Noisette (ou Pacha) a un avis</span><span class="s-date">ven. 13 nov.</span><h3>Les griffes sans drame</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Sérénité (14,90 €) · <strong>Objectif :</strong> Ventes du Duo (repas + bain)</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Couper ses griffes sans bagarre : l'astuce du tapis au mur »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Noisette</small></h4>
+<ul class="beats"><li><b>0-2 s</b> Salle de bain. Léa tient un petit coupe-griffes et sourit, pleine d'espoir.</li><li><b>2-5 s</b> Noisette se cache derrière la baignoire : seuls ses yeux et le bout de ses oreilles dépassent.</li><li><b>5-10 s</b> Il parle à la caméra, très soupçonneux, puis lève un sourcil, intéressé.</li></ul>
+<blockquote class="line">Le coupe-griffes ? Non merci. Le bain ? Encore moins. Sauf si… il y a du yaourt sur le mur.<small>18 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v9-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Noisette, lip-synced: Le coupe-griffes ? Non merci. Le bain ? Encore moins. Sauf si… il y a du yaourt sur le mur.
+Voice: playful young male French voice, slightly husky, comic timing.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Setting: a clean bathroom with white square wall tiles, a white bathtub and a sage green towel.
+Shots:
+- 0-2s: in the bathroom, Léa holds a small pet nail clipper and smiles hopefully, her mouth closed.
+- 2-5s: Noisette hides behind the bathtub, only his eyes and the tips of his ears visible, with an exaggerated dramatic expression.
+- 5-10s: close-up of Noisette peeking over the bathtub edge, talking to camera with comic suspicion, then raising one eyebrow with interest.
+Only Noisette moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v9-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa (voix off)</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Léa colle le tapis Naïa Sérénité sur le carrelage mural, à hauteur de truffe, et étale du yaourt.</li><li><b>3-7 s</b> Noisette lèche, détendu, pendant que Léa coupe le bout d'une griffe.</li><li><b>7-10 s</b> Noisette, serviette sur la tête, se lèche les babines, très fier.</li></ul>
+<blockquote class="line">Les ventouses sur le carrelage, une fine couche de yaourt. Pendant qu'il lèche, je m'occupe de ses pattes. Une griffe à la fois.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v9-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Voice-over in French, narrated off-screen by Léa; on screen, every character keeps their lips still: Les ventouses sur le carrelage, une fine couche de yaourt. Pendant qu'il lèche, je m'occupe de ses pattes. Une griffe à la fois.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Sérénité: a soft olive green square silicone lick mat with rounded corners, covered with small textured patterns, held by small suction cups.
+Setting: a clean bathroom with white square wall tiles, a white bathtub and a sage green towel.
+Shots:
+- 0-3s: Léa presses the olive green lick mat onto the white wall tiles at the height of Noisette's nose and spreads a thin layer of plain yogurt.
+- 3-7s: Noisette licks the mat calmly while Léa gently holds one front paw and trims just the tip of a nail.
+- 7-10s: Noisette sits proudly with the sage green towel on his head, licking his lips.
+All mouths stay closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v9-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>« Coupe seulement le bout de la griffe. Première fois ? Demande à ton vétérinaire ou à ton toiletteur de te montrer. »</li>
+<li>« Marche aussi pour le bain et le brossage. »</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Sérénité · 14,90 € · Duo 24,90 € (un pour le repas, un pour le bain) · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v9" style="margin:0">Noisette et le coupe-griffes : une longue histoire 😅
+Notre astuce : le tapis de léchage collé au carrelage, une fine couche de yaourt nature, et on avance une griffe à la fois. Ça marche aussi pour le bain et le brossage.
+
+Coupe seulement le bout de la griffe. Première fois ? Demande à ton vétérinaire ou à ton toiletteur de te montrer.
+
+👉 Commente GRIFFES et on t'envoie le lien + ton code −10 %.
+#chien #toilettagechien #astucechien #beagle #naiapets</pre>
+<pre id="pin-v9" hidden>Naïa Sérénité : https://naiapets.fr/produit-tapis-lechage.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v09-griffes · −10 % sur ta 1re commande avec le code NAIA10</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v9">Copier la légende</button><button class="copy" type="button" data-copy="pin-v9">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>GRIFFES</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-tapis-lechage.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v09-griffes</code></dd>
+<dt>Article lié</dt><dd>à créer : « Couper les griffes de son chien sans stress »</dd>
+</dl></div>
+<p class="safety">Le plan montre seulement le bout de la griffe coupé, jamais près de la partie rose.</p>
+</article>
+<article class="script" id="v10">
+<div class="s-head"><span class="s-num">V10</span><span class="pill s-avis">Noisette (ou Pacha) a un avis</span><span class="s-date">mar. 24 nov.</span><h3>La lettre au Père Noël</h3></div>
+<p class="meta"><strong>Produit :</strong> Naïa Malin (24,90 €) + Naïa Explore (34,90 €) · <strong>Objectif :</strong> Ventes cadeaux, semaine du Black Friday (27/11)</p>
+<div class="hook"><small>Accroche à l’écran, 0 à 2 s</small>« Il détruit ses peluches en 4 minutes ? Lis sa lettre au Père Noël. »</div>
+<div class="grid2">
+<div class="clip"><h4>Clip A · 10 s <small>· parle : Noisette</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Salon de Noël : du rembourrage de peluche partout autour d'un renne en peluche éventré. Noisette lève des yeux innocents.</li><li><b>3-10 s</b> Noisette, assis à un petit bureau près du sapin, lit sa lettre à voix haute, très sérieux.</li></ul>
+<blockquote class="line">Cher Père Noël. Les peluches, je les finis en quatre minutes. Cette année, je veux un cadeau qui fait réfléchir. Avec des croquettes.<small>23 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v10-a">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Spoken dialogue in French, said only by Noisette, lip-synced: Cher Père Noël. Les peluches, je les finis en quatre minutes. Cette année, je veux un cadeau qui fait réfléchir. Avec des croquettes.
+Voice: playful young male French voice, slightly husky, comic timing.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Setting: a cozy living room with a light oak floor, a sand-colored sofa, a cream wool rug, green plants and a tall window. The room is decorated for Christmas with a lit tree and warm fairy lights.
+Shots:
+- 0-3s: white plush stuffing scattered everywhere around a torn plush reindeer; Noisette looks up innocently.
+- 3-10s: Noisette sits at a tiny wooden desk by the Christmas tree with a pen and a letter covered in scribbled lines, reading it aloud to camera with great seriousness.
+Only Noisette moves their lips; everyone else keeps their mouth closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v10-a">Copier le prompt A</button></div></div>
+<div class="clip"><h4>Clip B · 10 s <small>· parle : Léa (voix off)</small></h4>
+<ul class="beats"><li><b>0-3 s</b> Matin de Noël : la boule Naïa Malin avec un ruban rouge et le tapis Naïa Explore sous le sapin.</li><li><b>3-7 s</b> Noisette arrache le ruban, pousse la boule du nez : les friandises tombent une à une.</li><li><b>7-10 s</b> Plan large : le sapin est intact, Noisette est fier, Léa sourit en pyjama sur le canapé.</li></ul>
+<blockquote class="line">Cette année, son cadeau le fait chercher. Il pousse, il fouille, il réfléchit… et le sapin reste debout.<small>18 mots</small></blockquote>
+<details><summary>Voir le prompt Omni</summary><pre id="p-v10-b">Vertical 9:16 video, 10 seconds, with hard cuts at the timestamps below.
+Voice-over in French, narrated off-screen by Léa; on screen, every character keeps their lips still: Cette année, son cadeau le fait chercher. Il pousse, il fouille, il réfléchit… et le sapin reste debout.
+Voice: warm, soft, mid-pitched French female voice, friendly and calm.
+Style: 3D animated family feature-film look, soft warm global illumination, detailed fur and fabric, big expressive eyes, gentle shallow depth of field, cinematic color palette of cream, sage green, teal and warm sand.
+Characters:
+- Léa, a French woman in her early thirties, warm smile, chestnut hair in a loose bun, sand-colored chunky knit sweater, small gold hoop earrings.
+- Noisette, a young tricolor beagle: white muzzle, chest and paws, warm tan face and long soft tan ears, black saddle on the back, big round dark-brown eyes, wearing a teal collar with a small round gold tag.
+Product, matching the attached reference photo exactly, shown as a real object:
+- Naïa Malin: an ivory treat puzzle ball about 10 cm wide with a transparent dome that shows the treats inside.
+- Naïa Explore: a paw-shaped snuffle mat made of many soft fabric petals and folds.
+Setting: a cozy living room with a light oak floor, a sand-colored sofa, a cream wool rug, green plants and a tall window. It is Christmas morning; the tree is lit.
+Shots:
+- 0-3s: under the decorated tree, the ivory puzzle ball tied with a red ribbon and the paw-shaped snuffle mat folded with a bow.
+- 3-7s: Noisette pulls off the ribbon, then pushes the puzzle ball with his nose so treats fall out one by one.
+- 7-10s: wide shot: the Christmas tree stands perfectly intact, Noisette sits proudly, Léa smiles warmly in cozy pajamas on the sofa.
+All mouths stay closed.
+All packaging and labels are plain and blank. Natural fluid motion, consistent character design in every shot.</pre></details>
+<div class="actions"><button class="copy" type="button" data-copy="p-v10-b">Copier le prompt B</button></div></div>
+</div>
+<div class="card" style="background:var(--bloc);border:0"><h4>Au montage</h4><ul class="clean" style="margin-top:8px;font-size:14.5px">
+<li>Si tu fais une offre Black Friday, elle va sur la carte de fin et dans la première ligne de la légende.</li>
+<li>« Pour l'avoir sous le sapin : commande avant le 9 décembre » (voir la décision n° 5).</li>
+<li><strong>Carte de fin (2 s) :</strong> Naïa Malin 24,90 € · Naïa Explore 34,90 € · livraison offerte · commande avant le 9/12 pour Noël · naiapets.fr</li></ul></div>
+<div class="post">
+<pre id="cap-v10" style="margin:0">La lettre de Noisette au Père Noël ✉️🎄
+Cette année, on remplace la peluche de 4 minutes par un cadeau qui le fait chercher : la boule à friandises Naïa Malin et le tapis de fouille Naïa Explore.
+
+🎁 Livraison offerte. Pour l'avoir sous le sapin, commande avant le 9 décembre.
+👉 Commente NOËL et on t'envoie les liens + ton code −10 %.
+Identifie quelqu'un dont le chien mérite une lettre au Père Noël.
+#noelchien #cadeauchien #chien #beagle #naiapets</pre>
+<pre id="pin-v10" hidden>Naïa Malin : https://naiapets.fr/produit-jouet-malin.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v10-noel · −10 % sur ta 1re commande avec le code NAIA10 · Naïa Explore : https://naiapets.fr/produit-tapis-fouille.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v10-noel</pre>
+<div class="actions"><button class="copy" type="button" data-copy="cap-v10">Copier la légende</button><button class="copy" type="button" data-copy="pin-v10">Copier le commentaire épinglé</button></div>
+<dl class="kv">
+<dt>Mot-clé du DM</dt><dd><strong>NOËL</strong> → message privé avec le lien et NAIA10</dd>
+<dt>Lien suivi</dt><dd><code>https://naiapets.fr/produit-jouet-malin.html?utm_source=facebook&amp;utm_medium=reel&amp;utm_campaign=reels-automne&amp;utm_content=v10-noel</code></dd>
+<dt>Article lié</dt><dd>à créer : « Idées cadeaux de Noël pour chien et chat »</dd>
+</dl></div>
+<p class="safety">Le jouet est toujours utilisé sous surveillance ; on ne le présente pas comme indestructible.</p>
+</article>
+<h2 id="vente">8. Du Reel à la vente</h2>
+<div class="card"><ol class="funnel">
+<li><div><strong>Dans la vidéo</strong><p class="small" style="margin-top:2px">Le produit est montré en action, tel qu'il est. La carte de fin donne le nom, le prix et naiapets.fr.</p></div></li>
+<li><div><strong>Dans la légende</strong><p class="small" style="margin-top:2px">L'accroche, le conseil complet (pour ceux qui lisent), puis « Commente MOT-CLÉ ».</p></div></li>
+<li><div><strong>Le commentaire épinglé</strong><p class="small" style="margin-top:2px">Sur Facebook, le lien suivi est cliquable. Sur Instagram et TikTok, les liens en commentaire ne sont pas cliquables : on renvoie vers le lien en bio et vers le mot-clé.</p></div></li>
+<li><div><strong>Le message privé automatique</strong><p class="small" style="margin-top:2px">La personne commente le mot-clé et reçoit en privé le lien de la fiche et le code NAIA10. Chaque commentaire fait aussi monter la vidéo dans l'algorithme. Je peux te monter ça avec Make ou ManyChat.</p></div></li>
+<li><div><strong>L'article de blog</strong><p class="small" style="margin-top:2px">Chaque vidéo a son article sur le site. La vidéo envoie du trafic, l'article se positionne sur Google pour la même question : le travail sert deux fois.</p></div></li>
+<li><div><strong>Le reciblage</strong><p class="small" style="margin-top:2px">Une audience Meta « a vu au moins 50 % d'un Reel Naïa », puis une pub avec la vidéo Avant / Avec Naïa et NAIA10. Ce sont des gens qui connaissent déjà Noisette.</p></div></li>
+</ol></div>
+<p>Les liens suivis (utm_content=v01-marron, v02-gamelle-jalouse…) te diront dans tes statistiques (pixel Meta, Clarity) quelle vidéo vend vraiment, pas seulement laquelle fait des vues.</p>
+<div class="tw"><table><thead><tr><th>Vidéo</th><th>Question visée sur Google</th><th>Article</th></tr></thead><tbody>
+<tr><td>V1 · Châtaigne ou marron d'Inde ?</td><td>marron d'Inde chien</td><td><span class="pill s-avis">À créer</span> Marron d'Inde, gland, châtaigne : ce que ton chien croise en automne</td></tr>
+<tr><td>V2 · La gamelle jalouse</td><td>chien mange trop vite</td><td><a href="https://naiapets.fr/blog-chien-mange-trop-vite-que-faire.html" target="_blank" rel="noopener">blog-chien-mange-trop-vite-que-faire.html</a></td></tr>
+<tr><td>V3 · Le bonbon sans sucre</td><td>xylitol chien</td><td><span class="pill s-avis">À créer</span> Xylitol et chien : où il se cache et que faire</td></tr>
+<tr><td>V4 · Le chrysanthème de la Toussaint</td><td>chrysanthème chat toxique</td><td><span class="pill s-avis">À créer</span> Plantes toxiques pour chat et chien : la liste de saison</td></tr>
+<tr><td>V5 · La citrouille d'Halloween</td><td>citrouille chien</td><td><a href="https://naiapets.fr/blog-tapis-lechage-chien-quoi-mettre.html" target="_blank" rel="noopener">blog-tapis-lechage-chien-quoi-mettre.html</a></td></tr>
+<tr><td>V6 · Pacha boit au robinet</td><td>chat boit au robinet</td><td><a href="https://naiapets.fr/blog-pourquoi-mon-chat-ne-boit-pas-assez.html" target="_blank" rel="noopener">blog-pourquoi-mon-chat-ne-boit-pas-assez.html</a></td></tr>
+<tr><td>V7 · Monsieur Ennui</td><td>occuper son chien quand il pleut</td><td><a href="https://naiapets.fr/blog-tapis-fouille-chien-enrichissement.html" target="_blank" rel="noopener">blog-tapis-fouille-chien-enrichissement.html</a></td></tr>
+<tr><td>V8 · 3 recettes à lécher</td><td>recette tapis de léchage</td><td><a href="https://naiapets.fr/blog-tapis-lechage-chien-quoi-mettre.html" target="_blank" rel="noopener">blog-tapis-lechage-chien-quoi-mettre.html</a></td></tr>
+<tr><td>V9 · Les griffes sans drame</td><td>couper les griffes de son chien</td><td><span class="pill s-avis">À créer</span> Couper les griffes de son chien sans stress</td></tr>
+<tr><td>V10 · La lettre au Père Noël</td><td>cadeau de Noël pour chien</td><td><span class="pill s-avis">À créer</span> Idées cadeaux de Noël pour chien et chat</td></tr>
+</tbody></table></div>
+<p class="small">5 articles existent déjà, 5 sont à écrire. Idéalement, chaque article est en ligne le jour de sa vidéo. Je n'ai pas pu mesurer le volume de ces recherches : la connexion à Ahrefs a échoué dans cette session.</p>
+<h2 id="tournage">9. Règles de tournage et de montage</h2>
+<div class="grid2"><div class="card ok stack"><h4>Dans Omni</h4><ul class="clean small">
+<li>Format 9:16 réglé dans l'interface ; il est aussi écrit en tête de chaque prompt.</li>
+<li>Joindre à chaque tir la fiche personnage de ceux qui apparaissent et la photo du produit.</li>
+<li>Une seule voix par clip. Quand on ne voit que les mains de Léa, on passe en voix off : aucun souci de synchronisation des lèvres.</li>
+<li>Aucun texte généré dans l'image : emballages et papiers sont décrits « plain and blank ». Tous les textes sont ajoutés au montage.</li>
+<li>Les prompts décrivent l'état voulu, sans négation dans les descriptions (règle de la ferme vidéo).</li>
+<li>Si un plan rate, on re-tire seulement ce clip, pas toute la vidéo.</li>
+</ul></div><div class="card ok stack"><h4>Au montage (CapCut)</h4><ul class="clean small">
+<li>Sous-titres automatiques en français, 2 à 4 mots par ligne, un mot-clé par phrase dans un bandeau teal ou sable, comme chez le compte de référence.</li>
+<li>Accroche en gros pendant les 2 premières secondes, titre de la série en petit au-dessus.</li>
+<li>Carte de fin de 2 s aux couleurs Naïa : produit, prix, naiapets.fr, et la mention santé quand le sujet l'exige.</li>
+<li>Musique douce sous la voix, nettement plus basse que la réplique.</li>
+<li>Filigrane Omni retiré, comme pour les vidéos de la boutique.</li>
+<li>Export 1080 × 1920, puis publication sur Facebook, Instagram et TikTok. Teste 12 h 30 et 19 h 30, garde le meilleur créneau après 4 vidéos.</li>
+</ul></div></div>
+<h2 id="conformite">10. Conformité</h2>
+<div class="tw"><table><thead><tr><th>Sujet</th><th>Ce qu'on fait</th></tr></thead><tbody>
+<tr><td><strong>Contenu IA</strong></td><td>Étiquette IA activée sur Meta et TikTok, et « vidéo créée avec l'IA » en fin de légende.</td></tr>
+<tr><td><strong>Allégations santé</strong></td><td>On dit « peut », « beaucoup de chats », « une petite étude ». Jamais « guérit », « prévient », « anti-stress prouvé ». Les vidéos danger et aliment rappellent que rien ne remplace le vétérinaire.</td></tr>
+<tr><td><strong>Avis</strong></td><td>Léa n'est jamais présentée comme cliente. L'avis cité dans V2 est présenté comme sur la fiche : avis d'un acheteur du modèle, annonce fournisseur.</td></tr>
+<tr><td><strong>Produits montrés</strong></td><td>Toujours le vrai produit, d'après le packshot. Aucun visage, aucune fonction inventée.</td></tr>
+<tr><td><strong>Numéros d'urgence (V3)</strong></td><td>CNITV 04 78 87 10 40 et CAPAE Ouest 02 40 68 77 40 : cohérents dans mes sources, mais à revérifier sur leurs sites le jour de la publication.</td></tr>
+<tr><td><strong>Congélation (V8)</strong></td><td>Vérifier sur la notice que le tapis Sérénité va au congélateur. Sinon, « une heure au frigo ».</td></tr>
+<tr><td><strong>Délais de Noël (V10)</strong></td><td>Le site annonce 5 à 9 jours ouvrés, le calcul en page Tempo et Malin donne 5 à 10, et la FAQ de Malin dit 5 à 14 jours. Harmonise avant la vidéo de Noël. Le 9 décembre couvre les trois cas.</td></tr>
+</tbody></table></div>
+<h2 id="budget">11. Budget et indicateurs</h2>
+<div class="grid2"><div class="card stack"><h4>Crédits Omni</h4><p>10 vidéos × 2 clips = 20 clips, soit 300 crédits à 15 crédits le clip. Avec un re-tir pour un clip sur deux, compte environ 450 crédits. Les 3 fiches personnage se font avec un générateur d'images, à part.</p><p class="small">Le plan de la ferme vidéo réservait déjà 990 crédits au sweat : vérifie ce qu'il te reste avant de lancer ce lot.</p></div>
+<div class="card stack"><h4>À suivre pour chaque vidéo</h4><ul class="clean small">
+<li>Accroche : vues à 3 s ÷ impressions.</li>
+<li>Rétention moyenne : regarde-t-on jusqu'au clip B ?</li>
+<li>Partages et enregistrements : la vraie mesure de la valeur du conseil.</li>
+<li>Commentaires avec le mot-clé = messages privés envoyés.</li>
+<li>Clics sur le lien suivi, puis ventes par vidéo.</li>
+</ul><p class="small">Après 6 vidéos, on garde les 2 séries qui font le plus de partages et de clics, et on leur donne 2 vidéos sur 3.</p></div></div>
+<h2 id="decembre">12. Idées pour décembre</h2>
+<div class="tw"><table><thead><tr><th>Idée</th><th>Série</th><th>Produit</th></tr></thead><tbody>
+<tr><td>Le gang du repas de fêtes : chocolat, raisins secs, os cuits de volaille, oignon de la farce. Une réplique chacun.</td><td><span class="pill s-mechants">Les Méchants</span></td><td>Orbe (le dessert autorisé)</td></tr>
+<tr><td>Pacha boit l'eau du pied du sapin.</td><td><span class="pill s-avis">Noisette (ou Pacha) a un avis</span></td><td>Naïa Source ou Inox</td></tr>
+<tr><td>Le liquide de refroidissement : goût sucré, flaques au garage en hiver, très dangereux.</td><td><span class="pill s-mechants">Les Méchants</span></td><td>Aucun (portée)</td></tr>
+<tr><td>Le chiot sous le sapin qui avale son premier repas en 20 secondes.</td><td><span class="pill s-face">Avant / Avec Naïa</span></td><td>Naïa Tempo</td></tr>
+<tr><td>« Il peut manger ça ? » : une série courte de quiz sur les aliments des fêtes.</td><td><span class="pill s-quiz">Le Quiz</span></td><td>Selon le sujet</td></tr>
+<tr><td>Naïa Fraîcheur et la canicule : à garder pour juin, l'article existe déjà.</td><td><span class="pill s-frigo">Le Frigo de Léa</span></td><td>Naïa Fraîcheur</td></tr>
+</tbody></table></div>
+<h2 id="decisions">13. Décisions à prendre</h2>
+<div class="card alert"><ol class="clean">
+<li><strong>Le casting</strong> : Noisette le beagle, Pacha le chat roux et Léa, ou préfères-tu un golden comme le compte de référence ? Ma recommandation : le beagle, pour ne pas ressembler à une copie et parce qu'il colle à nos produits.</li>
+<li><strong>Les deux Reels</strong> : envoie-moi un enregistrement d'écran pour que j'affine le rythme et la durée.</li>
+<li><strong>Le message privé automatique</strong> : je le mets en place (Make ou ManyChat) avant la première vidéo du 20 octobre ?</li>
+<li><strong>Les 5 articles à créer</strong> : je les écris pour qu'ils soient en ligne le jour de chaque vidéo ?</li>
+<li><strong>Noël et Black Friday</strong> : une offre pour le 27 novembre ? Et on fixe le 9 décembre comme date limite de commande pour Noël ?</li>
+</ol></div>
+<p class="foot">Sources : capture de la grille Reels du compte de référence (17/10/2026) · fiches produits et blog de naiapets.fr, relevés le 17/10/2026 · ASPCA, fiche Chrysanthemum · Cornell University, Riney Canine Health Center, xylitol · Duranton C. &amp; Horowitz A. (2019), Let me sniff! Nosework induces positive judgment bias in pet dogs, Applied Animal Behaviour Science 211, 61-66 · The Kennel Club et Agria, marrons d'Inde et glands · Futura Sciences, marron et châtaigne · fiches CNITV et CAPAE Ouest (annuaire Truffaut, HelloAsso CNITV) · règles de production de la ferme vidéo Naïa (26/09/2026).<br>Naïa Pets · Plan réalisé par DigitalAM.fr</p>
+</div>
+<script>
+(function(){
+  function flash(btn, txt){
+    var old = btn.dataset.label || btn.textContent;
+    btn.dataset.label = old;
+    btn.textContent = txt; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1800);
+  }
+  function selectText(el){
+    var d = el.closest('details'); if (d) d.open = true;
+    if (el.hidden) el.hidden = false;
+    var r = document.createRange(); r.selectNodeContents(el);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  document.querySelectorAll('button[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.copy);
+      if (!el) return;
+      var text = el.textContent;
+      var p = (navigator.clipboard && navigator.clipboard.writeText) ? navigator.clipboard.writeText(text) : Promise.reject();
+      p.then(function(){ flash(btn, 'Copié'); })
+       .catch(function(){ selectText(el); flash(btn, 'Texte sélectionné'); });
+    });
+  });
+})();
+</script>
